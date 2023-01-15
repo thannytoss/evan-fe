@@ -6,6 +6,7 @@ import GalaxyManager from "./GalaxyManager";
 import Planet from "./Planet";
 import Galaxy from "./Galaxy";
 import GalaxyWebAPI from "./GalaxyWebAPI";
+import { setgroups } from "process";
 
 interface IComponentProps { }
 
@@ -14,30 +15,22 @@ export const GalaxyMap: React.FC<IComponentProps> = (props: IComponentProps) => 
     let starField: number[][];
     let galaxy: any;
 
-    useLayoutEffect(() => {
-        GalaxyWebAPI.getInitialGalaxy('https://localhost:5001/GenerateGalaxy?starNumber=12').then(res => {
-            galaxy = res;
-        });
-    });
+    // useLayoutEffect(() => {
+    //     GalaxyWebAPI.getInitialGalaxy('https://localhost:5001/GenerateGalaxy?starNumber=12').then(res => {
+    //         galaxy = res;
+    //     });
+    // });
 
-    const setup = (p5: p5Types) => {
-        system = new StarSystem(p5);
-        p5.createCanvas(p5.windowWidth, p5.windowHeight);
-        p5.background(0);
-        p5.frameRate(30);
-        starField = GalaxyManager.generateStarFieldCoords(p5, 200);
-    };
+    //setup
+        const setup = (p5: p5Types) => {
+                starField = GalaxyManager.generateStarFieldCoords(p5 , GalaxyManager.getRandomRange(50, 200))
+                console.log(starField);
+        }
 
-    const draw = (p5: p5Types) => {
-        p5.background(0);
-        p5.fill(255);
-        starField.forEach((coord) => p5.ellipse(coord[0], coord[1], 3, 3));
-        p5.translate(p5.width / 2, p5.height / 2);
-
-        system.drawStar();
-        system.drawPlanets();
-        system.drawMoons();
-    };
+    //draw
+        const draw = (p5: p5Types) => {
+                
+        }
 
     class StarSystem {
         x: number;

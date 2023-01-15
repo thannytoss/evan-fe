@@ -28,6 +28,10 @@ export default class GalaxyManager {
     }
 
     static getRandomInt(x: number) {
-        return Math.floor(Math.random() * x);
+        return Math.floor(Math.random() * x );
+    }
+
+    static getRandomRange(lowNum: number,x: number) {
+        return Math.floor(Math.random() * x ) + lowNum; 
     }
 }
